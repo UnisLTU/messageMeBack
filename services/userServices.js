@@ -81,11 +81,10 @@ const searchUserDB = async (key, userId) => {
 
 const changeAvatarDB = async (_id, url) => {
   let user = await User.findById(_id);
-  if (!user) throw createError(404, "User was not found");
   if (user._id.toString() !== _id.toString())
     throw createError(401, "User not authorized to change avatar");
 
-  const editedUser = await User.findByIdAndUpdate(
+  let editedUser = await User.findByIdAndUpdate(
     _id,
     {
       pic: url,
@@ -95,12 +94,19 @@ const changeAvatarDB = async (_id, url) => {
     }
   );
 
-  editedUser = await User.find(key)
-    .find({ _id: { $ne: req.user._id } })
-    .select("-password");
+  user = {
+    _id: editedUser._id,
+    name: editedUser.name,
+    email: editedUser.email,
+    isAdmin: editedUser.isAdmin,
+    pic: editedUser.pic,
+    token: generateToken(editedUser._id),
+    success: true,
+  };
 
-  return editedUser;
+  return user;
 };
+
 module.exports = {
   createUserDB,
   loginWithCredentials,

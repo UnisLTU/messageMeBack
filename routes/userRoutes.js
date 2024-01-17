@@ -49,6 +49,7 @@ router.get("/", protect, async (req, res, next) => {
 router.put("/changeavatar", protect, async (req, res, next) => {
   const url = req.body.data.url;
   const _id = req.user._id;
+  console.log(_id);
   try {
     const data = await changeAvatar(_id, url);
     res.status(200).json(data);
