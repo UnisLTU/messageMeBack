@@ -26,8 +26,9 @@ const io = require("socket.io")(server, {
 
 app.use(
   cors({
-    origin: ["https://message-me-zeta.vercel.app"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: ["*"],
+    methods: ["*"],
+    allowedHeaders: ["Content-type", "Authorization"],
     credentials: true,
   })
 );
