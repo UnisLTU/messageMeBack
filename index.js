@@ -33,6 +33,8 @@ app.use(
   })
 );
 
+app.options("*", cors());
+
 app.use(express.json());
 app.use("/api/user", userRoutes);
 app.use("/api/chat", chatRoutes);
