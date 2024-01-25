@@ -21,13 +21,13 @@ const server = app.listen(process.env.PORT, () => {
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: "https://message-me-zeta.vercel.app",
+    origin: "https://message-me-eosin-one.vercel.app",
   },
 });
 
 app.use(
   cors({
-    origin: ["*"],
+    origin: ["https://message-me-eosin-one.vercel.app"],
     methods: ["*"],
     allowedHeaders: ["Content-type", "Authorization"],
     credentials: true,
