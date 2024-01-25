@@ -9,7 +9,7 @@ require("dotenv").config();
 
 const app = express();
 connectDB();
-app.options("*", cors());
+
 const server = app.listen(process.env.PORT, () => {
   console.log(`Server is listening on port ${process.env.PORT}`);
 });
@@ -17,13 +17,13 @@ const server = app.listen(process.env.PORT, () => {
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: "https://message-me-eosin-one.vercel.app/",
+    origin: "*",
   },
 });
 
 app.use(
   cors({
-    origin: ["https://message-me-eosin-one.vercel.app/"],
+    origin: ["*"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
