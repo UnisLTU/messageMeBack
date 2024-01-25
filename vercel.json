@@ -1,5 +1,13 @@
 {
   "version": 2,
   "builds": [{ "src": "*.js", "use": "@vercel/node" }],
-  "routes": [{ "src": "/(.*)", "dest": "/" }]
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/",
+      "headers": {
+        "Access-Control-Allow-Origin": "https://message-me-eosin-one.vercel.app"
+      }
+    }
+  ]
 }
