@@ -17,10 +17,9 @@ const server = app.listen(process.env.PORT, () => {
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: ["https://message-me-eosin-one.vercel.app"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
+    origin: "https://message-me-eosin-one.vercel.app",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
   },
 });
 
