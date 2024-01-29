@@ -10,6 +10,12 @@ require("dotenv").config();
 const app = express();
 connectDB();
 
+let baseURL;
+
+process.env.NODE_ENV === "production"
+  ? (baseURL = "https://message-me-eosin-one.vercel.app")
+  : (baseURL = "http://localhost:3000");
+
 const server = app.listen(process.env.PORT, () => {
   console.log(`Server is listening on port ${process.env.PORT}`);
 });
@@ -17,15 +23,14 @@ const server = app.listen(process.env.PORT, () => {
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
   cors: {
-    origin: "https://message-me-eosin-one.vercel.app",
+    origin: baseURL,
     methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type"],
   },
 });
 
 app.use(
   cors({
-    origin: ["https://message-me-eosin-one.vercel.app"],
+    origin: [baseURL],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
